@@ -6,8 +6,7 @@ import '../../App.css'
 const SearchBar = () => {
     return (
         <form role="search" autoComplete="off" className={classNames(
-            styles.form,
-            "spacing_noMargin", "spacing_margin-top-30"
+            styles.form
         )}>
             <div className={styles.container}>
                 <input className={styles.input} id="search" autoCapitalize="none" autoComplete="off" name="s" data-testid="search-input" placeholder="Поиск бесплатных изображений" type="search" value="" />

@@ -1,13 +1,13 @@
 .container {
     position: fixed;
-    z-index: 10;
     top: 0;
     right: 0;
     left: 0;
-    height: 80px;
+    z-index: 10;
     transition: background 0.2s ease, box-shadow 0.2s ease;
-    background: #fff;
     box-shadow: 0 1px 0 #f7f7f7;
+    background: #fff;
+    height: 80px;
 }
 
 .logo {
@@ -17,27 +17,24 @@
     min-height: 50px;
 }
 
-.flex {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 100%;
-}
-
 .left {
     display: flex;
-    align-items: center;
     flex: 1 1;
+    align-items: center;
     margin-right: 50px;
 }
 
-.right {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.transparent {
+    position: absolute;
+    box-shadow: none;
+    background: 0 0;
 }
 
-.transparent {
-    background: 0 0;
-    box-shadow: none;
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 30px;
+    padding-left: 30px;
+    height: 100%;
 }

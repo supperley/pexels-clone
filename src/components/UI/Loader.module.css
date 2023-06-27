@@ -5,16 +5,16 @@
     height: 80px;
 }
 .lds-hourglass:after {
-    content: ' ';
     display: block;
+    animation: lds-hourglass 1.2s infinite;
+    box-sizing: border-box;
+    margin: 8px;
+    border: 32px solid #f48405;
+    border-color: #f48405 transparent #f48405 transparent;
     border-radius: 50%;
     width: 0;
     height: 0;
-    margin: 8px;
-    box-sizing: border-box;
-    border: 32px solid #f48405;
-    border-color: #f48405 transparent #f48405 transparent;
-    animation: lds-hourglass 1.2s infinite;
+    content: ' ';
 }
 @keyframes lds-hourglass {
     0% {
