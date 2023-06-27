@@ -1,15 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './SearchBar.module.css';
 import classNames from 'classnames';
 import '../../App.css'
+import { useNavigate } from 'react-router-dom';
 
 const SearchBar = () => {
+    const [query, setQuery] = useState('');
+    const navigate = useNavigate();
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        navigate(`/search/${query}`);
+    };
+
     return (
         <form role="search" autoComplete="off" className={classNames(
             styles.form
-        )}>
+        )} onSubmit={handleSubmit}>
             <div className={styles.container}>
-                <input className={styles.input} id="search" autoCapitalize="none" autoComplete="off" name="s" data-testid="search-input" placeholder="Поиск бесплатных изображений" type="search" value="" />
+                <input className={styles.input} value={query} onChange={e => setQuery(e.target.value)} id="search" autoCapitalize="none" autoComplete="off" name="search" data-testid="search-input" placeholder="Поиск бесплатных изображений" type="search" />
                 <button className={styles.button}>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"

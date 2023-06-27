@@ -1,11 +1,20 @@
 import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import styles from './Search.module.css';
+import classNames from 'classnames';
+import ImageGallery from '../components/layout/ImageGallery';
 
-const Search = () => {
-    const location = useLocation();
-    const searchParams = new URLSearchParams(location.search);
-    const [query, setQuery] = useState(searchParams.get('query'));
-    return <div>{query}</div>;
+const Search = (props) => {
+    const { query } = useParams();
+
+    return (
+        <>
+            <main className={styles.searchWrapper}>
+                <h1 className={classNames(styles.searchHeader, "text")}>{query}</h1>
+                <ImageGallery />
+            </main>
+        </>
+    );
 };
 
 export default Search;

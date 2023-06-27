@@ -1,0 +1,44 @@
+.searchWrapper {
+    display: block;
+    margin: 0;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+@media (min-width: 0) and (max-width: 650px) {
+    .searchWrapper {
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+}
+
+@media (min-width: 651px) and (max-width: 900px) {
+    .searchWrapper {
+        padding-right: 15px;
+        padding-left: 15px;
+        max-width: 900px;
+    }
+}
+
+@media (min-width: 901px) and (max-width: 1440px) {
+    .searchWrapper {
+        padding-right: 30px;
+        padding-left: 30px;
+        max-width: 1300px;
+    }
+}
+
+@media (min-width: 1441px) {
+    .searchWrapper {
+        padding-right: 80px;
+        padding-left: 80px;
+        max-width: 1600px;
+    }
+}
+
+@media (min-width: 651px) {
+    .searchWrapper {
+        margin-right: auto;
+        margin-left: auto;
+    }
+}
