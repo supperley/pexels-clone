@@ -3,7 +3,14 @@ import styles from './HeroHeader.module.css';
 import classNames from 'classnames';
 import SearchBar from '../UI/SearchBar';
 
+const categories = ["технология", "путешествовать", "автомобиль", "лето", "еда", "офис", "бизнес", "небо", "цветы", "пляж",
+    "природа", "абстрактный", "красивый", "пейзаж", "лес", "темный"]
+
 const HeroHeader = () => {
+    const randomTrendingSearches = categories
+        .sort(() => Math.random() - 0.5)
+        .slice(0, 7);
+
     return (
         <header className={styles.heroHeader}>
             <div className={classNames(styles.content)}>
@@ -14,16 +21,13 @@ const HeroHeader = () => {
                 <div className={classNames(styles.trendingSearches)}>
                     <span className={classNames(styles.trendingSearchesText, "text")}>Тенденции:</span>
                     <ul className={styles.trendingSearchesList}>
-                        <li className={classNames(styles.trendingSearchesItem, "text", "clickable")}>автомобиль,
-                        </li>
-                        <li className={classNames(styles.ellipsis, "clickable")} /*href="/ru-ru/popular-searches/"*/>
-                            <svg className={"icon_color-whiteFFFFFF"} viewBox="0 0 24 24" width="24" height="24">
-                                <path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"></path>
-                            </svg>
-                        </li>
+                        {randomTrendingSearches.map((item, index) => (<li className={classNames(styles.trendingSearchesItem, "text")}>
+                            <a className={classNames(styles.trendingSearchesLink, "link", "clickable")} href={`search/${item}/`}>{item}</a>
+                            {index !== randomTrendingSearches.length - 1 && <>,&nbsp;</>}
+                        </li>))}
                     </ul>
                 </div>
-                <a className={classNames("text", styles.attribution, "link", "clickable")} href="https://www.pexels.com/ru-ru/photo/16736610/">
+                <a className={classNames("text", styles.attribution, "link", "clickable")} >
                     <span className={classNames("text", styles.attributionLabel)}>Автор фото&nbsp;—</span>
                     &nbsp;
                     <span className={classNames("text", styles.attributionAuthor)}>Rodion Kutsaiev</span>

@@ -50,3 +50,22 @@
     padding-left: 30px;
     height: 100%;
 }
+
+.placeholderPadding {
+    min-height: 80px;
+}
+
+@media (min-width: 1441px) {
+    .nav {
+        padding-right: 30px;
+        padding-left: 30px;
+        max-width: 1600px;
+    }
+}
+
+@media (min-width: 651px) {
+    .nav {
+        margin-right: auto;
+        margin-left: auto;
+    }
+}

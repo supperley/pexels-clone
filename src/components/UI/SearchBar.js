@@ -4,8 +4,8 @@ import classNames from 'classnames';
 import '../../App.css'
 import { useNavigate } from 'react-router-dom';
 
-const SearchBar = () => {
-    const [query, setQuery] = useState('');
+const SearchBar = (props) => {
+    const [query, setQuery] = useState(props.query);
     const navigate = useNavigate();
 
     const handleSubmit = (event) => {
@@ -18,7 +18,7 @@ const SearchBar = () => {
             styles.form
         )} onSubmit={handleSubmit}>
             <div className={styles.container}>
-                <input className={styles.input} value={query} onChange={e => setQuery(e.target.value)} id="search" autoCapitalize="none" autoComplete="off" name="search" data-testid="search-input" placeholder="Поиск бесплатных изображений" type="search" />
+                <input className={styles.input} value={query} onChange={e => setQuery(e.target.value)} id="search" autoCapitalize="none" autoComplete="off" name="search" data-testid="search-input" placeholder="Поиск бесплатных изображений" />
                 <button className={styles.button}>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
