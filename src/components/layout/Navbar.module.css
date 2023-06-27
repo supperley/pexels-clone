@@ -17,6 +17,18 @@
     min-height: 50px;
 }
 
+@media (min-width: 1441px) {
+    .logo {
+        margin-right: 50px;
+    }
+}
+
+@media (min-width: 901px) and (max-width: 1440px) {
+    .logo {
+        margin-right: 30px;
+    }
+}
+
 .left {
     display: flex;
     flex: 1 1;

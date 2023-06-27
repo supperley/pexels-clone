@@ -8,7 +8,9 @@ const HeroHeader = () => {
         <header className={styles.heroHeader}>
             <div className={classNames(styles.content)}>
                 <h1 className={classNames(styles.text_header, "text")}>Лучшие бесплатные стоковые фото, изображения без роялти и видео от талантливых авторов.</h1>
-                <SearchBar />
+                <div className={classNames(styles.searchBar)}>
+                    <SearchBar />
+                </div>
                 <div className={classNames(styles.trendingSearches)}>
                     <span className={classNames(styles.trendingSearchesText, "text")}>Тенденции:</span>
                     <ul className={styles.trendingSearchesList}>
