@@ -6,7 +6,7 @@ const Layout = (props) => {
     return (
         <Fragment>
             <Navbar />
-            <main className={styles.main}>{props.children}</main>
+            {props.children}
         </Fragment>
     );
 };

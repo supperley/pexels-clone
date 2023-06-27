@@ -1,0 +1,86 @@
+.heroHeader {
+    position: relative;
+    z-index: 9;
+    width: 100%;
+    min-height: 500px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.heroHeader::after {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    content: "";
+    opacity: .5;
+    background: #000;
+}
+
+.content {
+    display: flex;
+    width: 100%;
+    max-width: 630px;
+    flex-direction: column;
+}
+
+.img {
+    position: absolute;
+    z-index: -2;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.trendingSearches {
+    white-space: nowrap;
+}
+
+.trendingSearchesText {
+    display: inline-block;
+    color: hsla(0, 0%, 100%, .7);
+}
+
+.trendingSearchesList {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.trendingSearches li {
+    display: inline-block;
+}
+
+.ellipsis {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    margin-bottom: 1px;
+    vertical-align: middle;
+    border-radius: 50%;
+    background: hsla(0, 0%, 100%, .3);
+}
+
+.attribution {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    transition: opacity .2s ease;
+    opacity: .7;
+}
+
+.attribution:hover {
+    opacity: 1;
+    filter: none;
+}
+
+.attributionLabel {
+    opacity: .6;
+}
