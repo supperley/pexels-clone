@@ -17,12 +17,16 @@ const ImageGallery = (props) => {
             ? await PhotoService.search(props.searchQuery, pageNumber, 15)
             : await PhotoService.getCurated(pageNumber);
 
-        if (pageNumber === 1 && loadedImages.length === 0) {
-            props?.handleNoResults(true);
+        if (loadedImages.length === 0) {
+            if (pageNumber === 1) {
+                props?.handleNoResults(true);
+            }
             setIsEnd(true);
         }
 
-        console.log(loadedImages);
+        console.log(
+            `loadedImages.length: ${loadedImages.length}, loadedImages: ${loadedImages}, isEnd: ${isEnd}`
+        );
 
         const loadedImagesFirst = loadedImages.slice(
             0,
@@ -74,7 +78,7 @@ const ImageGallery = (props) => {
                 !isEnd &&
                 scrollTop + window.innerHeight >= offsetHeight
             ) {
-                console.log('[handleScroll] setPageNumber');
+                console.log(`[handleScroll] setPageNumber, isEnd: ${isEnd}`);
                 setPageNumber((prevPage) => prevPage + 1);
             }
         };
@@ -84,7 +88,7 @@ const ImageGallery = (props) => {
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
-    }, []);
+    }, [isEnd]);
 
     useEffect(() => {
         fetchImages();
