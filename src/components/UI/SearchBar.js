@@ -10,8 +10,10 @@ const SearchBar = (props) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        navigate(`/search/${query}`, { replace: true });
-        window.location.reload();
+        if (query && query?.trim()) {
+            navigate(`/search/${query}`, { replace: true });
+            window.location.reload();
+        }
     };
 
     return (

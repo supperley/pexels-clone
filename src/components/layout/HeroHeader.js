@@ -50,7 +50,7 @@ const categories = [
 
 const HeroHeader = () => {
     const [randomTrendingSearches, setRandomTrendingSearches] = useState([]);
-    const [headerImage, setHeaderImage] = useState({
+    const [headerPhoto, setHeaderPhoto] = useState({
         photographer: '',
         src: '',
         url: '',
@@ -70,24 +70,24 @@ const HeroHeader = () => {
             `setState completed, randomTrendingSearches: ${randomTrendingSearches} `
         );
         if (randomTrendingSearches.length > 0) {
-            fetchImage();
+            fetchPhoto();
         }
     }, [randomTrendingSearches]);
 
-    const [fetchImage, isLoading, error] = useFetching(async () => {
+    const [fetchPhoto, isLoading, error] = useFetching(async () => {
         console.log(
             `HeroHeader callback, randomTrendingSearches: ${randomTrendingSearches} `
         );
 
-        const loadedImages = await PhotoService.search(
+        const loadedPhotos = await PhotoService.search(
             randomTrendingSearches[0],
             1,
             1
         );
 
-        console.log(loadedImages);
+        console.log(loadedPhotos);
 
-        setHeaderImage(loadedImages[0]);
+        setHeaderPhoto(loadedPhotos[0]);
     });
 
     return (
@@ -143,7 +143,8 @@ const HeroHeader = () => {
                         'link',
                         'clickable'
                     )}
-                    href={headerImage?.url}
+                    href={headerPhoto?.url}
+                    target="_blank"
                 >
                     <span
                         className={classNames('text', styles.attributionLabel)}
@@ -154,16 +155,16 @@ const HeroHeader = () => {
                     <span
                         className={classNames('text', styles.attributionAuthor)}
                     >
-                        {headerImage?.photographer || ''}
+                        {headerPhoto?.photographer || ''}
                     </span>
                 </a>
             </div>
             <img
                 className={styles.img}
                 src={`${
-                    headerImage?.src || ''
+                    headerPhoto?.src || ''
                 }?auto=compress&cs=tinysrgb&fit=crop&h=500&w=1400&dpr=1`}
-                alt="background-image"
+                alt="background-photo"
             />
         </header>
     );

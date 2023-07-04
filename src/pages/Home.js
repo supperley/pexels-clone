@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import HeroHeader from '../components/layout/HeroHeader';
 import classNames from 'classnames';
-import ImageGallery from '../components/layout/ImageGallery';
+import PhotoGallery from '../components/layout/PhotoGallery';
 import styles from './Home.module.css';
 import Navbar from '../components/layout/Navbar';
 
@@ -28,11 +28,11 @@ const Home = () => {
         <>
             <Navbar isScrolled={isScrolled} isHome={true} />
             <HeroHeader />
-            <main className={styles.imageGalleryWrapper}>
-                <h4 className={classNames(styles.imageGalleryHeader, 'text')}>
+            <main className={styles.photoGalleryWrapper}>
+                <h4 className={classNames(styles.photoGalleryHeader, 'text')}>
                     Бесплатные стоковые фото
                 </h4>
-                <ImageGallery />
+                <PhotoGallery />
             </main>
         </>
     );

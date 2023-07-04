@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styles from './Search.module.css';
 import classNames from 'classnames';
-import ImageGallery from '../components/layout/ImageGallery';
+import PhotoGallery from '../components/layout/PhotoGallery';
 import Navbar from '../components/layout/Navbar';
 import SearchNotFound from './SearchNotFound';
 
@@ -20,7 +20,7 @@ const Search = (props) => {
                     <h1 className={classNames(styles.searchHeader, 'text')}>
                         {query}
                     </h1>
-                    <ImageGallery
+                    <PhotoGallery
                         searchQuery={query}
                         handleNoResults={setNoResults}
                     />

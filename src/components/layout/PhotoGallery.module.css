@@ -1,0 +1,22 @@
+.gridWrapper {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 50px;
+    width: 100%;
+}
+
+.column {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.loadingContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+}
