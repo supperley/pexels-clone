@@ -53,6 +53,7 @@ const HeroHeader = () => {
     const [headerImage, setHeaderImage] = useState({
         photographer: '',
         src: '',
+        url: '',
     });
 
     useEffect(() => {
@@ -141,6 +142,7 @@ const HeroHeader = () => {
                         'link',
                         'clickable'
                     )}
+                    href={headerImage.url}
                 >
                     <span
                         className={classNames('text', styles.attributionLabel)}
