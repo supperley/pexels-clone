@@ -2,73 +2,52 @@ import React, { useEffect, useState } from 'react';
 import styles from './ImageGallery.module.css';
 import classNames from 'classnames';
 import Spinner from '../UI/Spinner';
-import axios from 'axios';
+import useFetching from '../../hooks/useFetching';
+import PhotoService from '../../api/PhotoService';
 
 const ImageGallery = () => {
-    const [isLoading, setIsLoading] = useState(false);
     const [pageNumber, setPageNumber] = useState(1);
     const [firstColumnImages, setFirstColumnImages] = useState([]);
     const [secondColumnImages, setSecondColumnImages] = useState([]);
     const [thirdColumnImages, setThirdColumnImages] = useState([]);
 
-    const fetchImages = async () => {
-        try {
-            const response = await axios.get(
-                `https://api.pexels.com/v1/curated?per_page=15&page=${pageNumber}`,
-                {
-                    headers: {
-                        Authorization:
-                            '563492ad6f917000010000014640aabb4e9d420cbe1c0df7daf4c2bf',
-                    },
-                }
-            );
+    const [fetchImages, isLoading, error] = useFetching(async () => {
+        const loadedImages = await PhotoService.getCurated(pageNumber);
 
-            console.log('response: ', response);
+        console.log(loadedImages);
 
-            const loadedImages = response.data.photos.map((photo) => ({
-                id: photo.id,
-                url: photo.url,
-                src: photo.src.original,
-                photographer: photo.photographer,
-                photographerURL: photo.photographer_url,
-            }));
+        const loadedImagesFirst = loadedImages.slice(
+            0,
+            loadedImages.length / 3
+        );
 
-            const loadedImagesFirst = loadedImages.slice(
-                0,
-                loadedImages.length / 3
-            );
+        const loadedImagesSecond = loadedImages.slice(
+            loadedImages.length / 3,
+            (loadedImages.length / 3) * 2
+        );
 
-            const loadedImagesSecond = loadedImages.slice(
-                loadedImages.length / 3,
-                (loadedImages.length / 3) * 2
-            );
+        const loadedImagesThird = loadedImages.slice(
+            (loadedImages.length / 3) * 2,
+            loadedImages.length
+        );
 
-            const loadedImagesThird = loadedImages.slice(
-                (loadedImages.length / 3) * 2,
-                loadedImages.length
-            );
+        console.log('loadedImagesFirst', loadedImagesFirst);
+        console.log('loadedImagesSecond', loadedImagesSecond);
+        console.log('loadedImagesThird', loadedImagesThird);
 
-            console.log('loadedImagesFirst', loadedImagesFirst);
-            console.log('loadedImagesSecond', loadedImagesSecond);
-            console.log('loadedImagesThird', loadedImagesThird);
-
-            setFirstColumnImages((prevImages) => [
-                ...prevImages,
-                ...loadedImagesFirst,
-            ]);
-            setSecondColumnImages((prevImages) => [
-                ...prevImages,
-                ...loadedImagesSecond,
-            ]);
-            setThirdColumnImages((prevImages) => [
-                ...prevImages,
-                ...loadedImagesThird,
-            ]);
-        } catch (error) {
-            console.log('Error while fetching images: ', error);
-        }
-        setIsLoading(false);
-    };
+        setFirstColumnImages((prevImages) => [
+            ...prevImages,
+            ...loadedImagesFirst,
+        ]);
+        setSecondColumnImages((prevImages) => [
+            ...prevImages,
+            ...loadedImagesSecond,
+        ]);
+        setThirdColumnImages((prevImages) => [
+            ...prevImages,
+            ...loadedImagesThird,
+        ]);
+    });
 
     useEffect(() => {
         const handleScroll = () => {
@@ -83,8 +62,7 @@ const ImageGallery = () => {
             );
 
             if (!isLoading && scrollTop + window.innerHeight >= offsetHeight) {
-                console.log('[handleScroll] setIsLoading');
-                setIsLoading(true);
+                console.log('[handleScroll] setPageNumber');
                 setPageNumber((prevPage) => prevPage + 1);
             }
         };

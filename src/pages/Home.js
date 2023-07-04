@@ -32,7 +32,7 @@ const Home = () => {
                 <h4 className={classNames(styles.imageGalleryHeader, 'text')}>
                     Бесплатные стоковые фото
                 </h4>
-                <ImageGallery />
+                {/* <ImageGallery /> */}
             </main>
         </>
     );

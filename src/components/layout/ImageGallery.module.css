@@ -55,7 +55,7 @@
     pointer-events: none;
 }
 
-button {
+.buttonGroup button {
     position: relative;
     vertical-align: top;
     z-index: 0;
@@ -79,12 +79,12 @@ button {
     white-space: nowrap;
 }
 
-button:hover {
+.buttonGroup button:hover {
     opacity: 0.9;
     background: #fff;
 }
 
-svg {
+.buttonGroup svg {
     fill: #4a4a4a;
 }
 

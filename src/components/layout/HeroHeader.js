@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './HeroHeader.module.css';
 import classNames from 'classnames';
 import SearchBar from '../UI/SearchBar';
+import useFetching from '../../hooks/useFetching';
+import PhotoService from '../../api/PhotoService';
 
 const categories = [
     '35 мм',
@@ -47,9 +49,44 @@ const categories = [
 ];
 
 const HeroHeader = () => {
-    const randomTrendingSearches = categories
-        .sort(() => Math.random() - 0.5)
-        .slice(0, 7);
+    const [randomTrendingSearches, setRandomTrendingSearches] = useState([]);
+    const [headerImage, setHeaderImage] = useState({
+        photographer: '',
+        src: '',
+    });
+
+    useEffect(() => {
+        const sortedCategories = categories
+            .sort(() => Math.random() - 0.5)
+            .slice(0, 7);
+        console.log(`sortedCategories ${sortedCategories}`);
+
+        setRandomTrendingSearches(sortedCategories);
+    }, []);
+
+    useEffect(() => {
+        console.log(
+            `setState completed, randomTrendingSearches: ${randomTrendingSearches} `
+        );
+        if (randomTrendingSearches.length > 0) {
+            fetchImage();
+        }
+    }, [randomTrendingSearches]);
+
+    const [fetchImage, isLoading, error] = useFetching(async () => {
+        console.log(
+            `HeroHeader callback, randomTrendingSearches: ${randomTrendingSearches} `
+        );
+
+        const loadedImages = await PhotoService.search(
+            randomTrendingSearches[0],
+            1
+        );
+
+        console.log(loadedImages);
+
+        setHeaderImage(loadedImages[0]);
+    });
 
     return (
         <header className={styles.heroHeader}>
@@ -114,13 +151,15 @@ const HeroHeader = () => {
                     <span
                         className={classNames('text', styles.attributionAuthor)}
                     >
-                        Rodion Kutsaiev
+                        {headerImage?.photographer || ''}
                     </span>
                 </a>
             </div>
             <img
                 className={styles.img}
-                src="https://images.pexels.com/photos/16736610/pexels-photo-16736610.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=500&w=1400&dpr=1"
+                src={`${
+                    headerImage?.src || ''
+                }?auto=compress&cs=tinysrgb&fit=crop&h=500&w=1400&dpr=1`}
                 alt="background-image"
             />
         </header>
