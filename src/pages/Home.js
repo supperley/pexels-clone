@@ -5,7 +5,7 @@ import ImageGallery from '../components/layout/ImageGallery';
 import styles from './Home.module.css';
 import Navbar from '../components/layout/Navbar';
 
-const Main = () => {
+const Home = () => {
     const [isScrolled, setIsScrolled] = useState(false);
 
     useEffect(() => {
@@ -29,11 +29,13 @@ const Main = () => {
             <Navbar isScrolled={isScrolled} isHome={true} />
             <HeroHeader />
             <main className={styles.imageGalleryWrapper}>
-                <h4 className={classNames(styles.imageGalleryHeader, "text")}>Бесплатные стоковые фото</h4>
+                <h4 className={classNames(styles.imageGalleryHeader, 'text')}>
+                    Бесплатные стоковые фото
+                </h4>
                 <ImageGallery />
             </main>
         </>
     );
 };
 
-export default Main;
+export default Home;

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './SearchBar.module.css';
 import classNames from 'classnames';
-import '../../App.css'
+import '../../App.css';
 import { useNavigate } from 'react-router-dom';
 
 const SearchBar = (props) => {
@@ -14,11 +14,24 @@ const SearchBar = (props) => {
     };
 
     return (
-        <form role="search" autoComplete="off" className={classNames(
-            styles.form
-        )} onSubmit={handleSubmit}>
+        <form
+            role="search"
+            autoComplete="off"
+            className={classNames(styles.form)}
+            onSubmit={handleSubmit}
+        >
             <div className={styles.container}>
-                <input className={styles.input} value={query} onChange={e => setQuery(e.target.value)} id="search" autoCapitalize="none" autoComplete="off" name="search" data-testid="search-input" placeholder="Поиск бесплатных изображений" />
+                <input
+                    className={styles.input}
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                    id="search"
+                    autoCapitalize="none"
+                    autoComplete="off"
+                    name="search"
+                    data-testid="search-input"
+                    placeholder="Поиск бесплатных изображений"
+                />
                 <button className={styles.button}>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -30,7 +43,7 @@ const SearchBar = (props) => {
                     </svg>
                 </button>
             </div>
-        </form >
+        </form>
     );
 };
 

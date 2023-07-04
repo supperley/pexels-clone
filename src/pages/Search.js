@@ -12,7 +12,9 @@ const Search = (props) => {
         <>
             <Navbar isScrolled={true} query={query} />
             <main className={styles.searchWrapper}>
-                <h1 className={classNames(styles.searchHeader, "text")}>{query}</h1>
+                <h1 className={classNames(styles.searchHeader, 'text')}>
+                    {query}
+                </h1>
                 <ImageGallery />
             </main>
         </>
