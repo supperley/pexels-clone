@@ -21,12 +21,14 @@ export default class PhotoService {
         }
     }
 
-    static async search(query, per_page) {
-        console.log(`PhotoService search ${query} ${per_page}`);
+    static async search(query, page, per_page) {
+        console.log(
+            `PhotoService search ${query}, page = ${page}, per_page = ${per_page}`
+        );
 
         try {
             const response = await PexelsClient.get(
-                `/v1/search?query=${query}&per_page=${per_page}`
+                `/v1/search?query=${query}&page=${page}&per_page=${per_page}`
             );
 
             console.log('response: ', response);

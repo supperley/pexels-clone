@@ -10,7 +10,7 @@ const SearchBar = (props) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        navigate(`/search/${query}`);
+        navigate(`/search/${query}`, { replace: true });
     };
 
     return (
@@ -32,7 +32,7 @@ const SearchBar = (props) => {
                     data-testid="search-input"
                     placeholder="Поиск бесплатных изображений"
                 />
-                <button className={styles.button}>
+                <button className={styles.button} type="submit">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 24 24"

@@ -81,6 +81,7 @@ const HeroHeader = () => {
 
         const loadedImages = await PhotoService.search(
             randomTrendingSearches[0],
+            1,
             1
         );
 
@@ -142,7 +143,7 @@ const HeroHeader = () => {
                         'link',
                         'clickable'
                     )}
-                    href={headerImage.url}
+                    href={headerImage?.url}
                 >
                     <span
                         className={classNames('text', styles.attributionLabel)}
