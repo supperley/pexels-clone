@@ -1,0 +1,77 @@
+.filtersWrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-bottom: 30px;
+    margin: 0;
+}
+
+.filtersButton {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin: 0;
+    border-color: #dfdfe0;
+    background: #fff;
+    padding-right: 20px;
+    padding-left: 20px;
+    color: #000;
+}
+
+.filtersButton:hover {
+    border-color: #7f7f7f;
+    color: #000;
+}
+
+.filtersButton > span {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.filtersIcon {
+    fill: #7f7f7f;
+    flex: none;
+    z-index: 1;
+    transition: fill 0.1s, transform 0.2s ease-in-out;
+    margin: 0;
+    margin-right: 8px;
+    width: 22px;
+    height: 22px;
+    line-height: 1.3;
+}
+
+.rotateIcon {
+    transform: rotate(-180deg);
+}
+
+.filtersButtonText {
+    z-index: 1;
+    overflow: hidden;
+    line-height: 1.3;
+    text-overflow: ellipsis;
+}
+
+.filtersListContainer {
+    grid-gap: 30px;
+    display: grid;
+    position: relative;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 30px;
+    transform: translateY(0px);
+    z-index: 1;
+    transition: all 0.1s;
+    margin-bottom: 30px;
+    margin: 0;
+    width: 100%;
+    height: 50px;
+}
+
+.filtersListContainerHidden {
+    transform: translateY(-20px);
+    z-index: 0;
+    height: 0;
+    overflow: hidden;
+}

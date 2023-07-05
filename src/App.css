@@ -14,7 +14,11 @@ html {
         Roboto, Oxygen, Cantarell, Helvetica Neue, Ubuntu, sans-serif;
 }
 
-input {
+button,
+input,
+optgroup,
+select,
+textarea {
     margin: 0;
     font-size: 100%;
     line-height: 1.15;

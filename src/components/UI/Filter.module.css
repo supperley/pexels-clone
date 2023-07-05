@@ -1,0 +1,153 @@
+.filterDropdown {
+    display: inline-flex;
+    position: relative;
+    margin: 0;
+    width: 100%;
+}
+
+.filterButton {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin: 0;
+    border-color: #dfdfe0;
+    background: #fff;
+    padding-right: 20px;
+    padding-left: 20px;
+    width: 100%;
+    color: #000;
+}
+
+.filterButton:hover {
+    border-color: #7f7f7f;
+    color: #000;
+}
+
+.filterButton_active {
+    border-color: #4a4a4a;
+    background: #ededed;
+}
+
+.filterButton_active svg {
+    fill: #4a4a4a;
+}
+
+.filterButton span {
+    display: inline-flex;
+    align-items: center;
+    width: 100%;
+    width: 100%;
+    color: #4a4a4a;
+    text-align: left;
+}
+
+.filterText {
+    justify-content: unset;
+    z-index: 1;
+    width: 100%;
+    overflow: hidden;
+    color: #4a4a4a;
+    line-height: 1.3;
+    text-align: left;
+    text-overflow: ellipsis;
+}
+
+.filterIcon {
+    fill: #bfbfbf;
+    flex: none;
+    align-self: flex-end;
+    z-index: 1;
+    transition: fill 0.1s, transform 0.2s ease-in-out;
+    margin-right: -5px;
+    margin-left: 8px;
+    width: 22px;
+    height: 22px;
+    line-height: 1.3;
+}
+
+.rotateIcon {
+    transform: rotate(-180deg);
+}
+
+.dropdownMenu {
+    display: none;
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0px;
+    z-index: 9;
+    margin: 0;
+    box-shadow: 0 3px 5px 1px rgba(0, 0, 0, 0.05);
+    border: 1px solid #dfdfe0;
+    border-radius: 6px;
+    background: #fff;
+    padding: 0;
+    min-width: 460px;
+    max-width: calc(100vw - 50px);
+    max-height: 50vh;
+    overflow: auto;
+    list-style: none;
+}
+
+.dropdownMenuOpen {
+    display: block;
+}
+
+.option {
+    display: flex;
+    position: relative;
+    align-items: center;
+    cursor: pointer;
+    border: none;
+    background: #fff;
+    padding: 0 20px;
+    width: 100%;
+    height: 50px;
+    color: #bfbfbf;
+    font-weight: 500;
+    text-align: left;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.option:hover {
+    background: #f7f7f7;
+}
+
+.option:not(:last-child):after {
+    position: absolute;
+    right: 20px;
+    bottom: 0;
+    left: 20px;
+    margin: 0;
+    border: none;
+    background: #f7f7f7;
+    padding: 0;
+    height: 1px;
+    content: '';
+}
+
+.optionChildren {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+    width: 100%;
+}
+
+.optionText {
+    fill: #2c343e;
+    margin-right: 8px;
+    max-width: 100%;
+    overflow: hidden;
+    color: #2c343e;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 26px;
+    text-overflow: ellipsis;
+}
+
+.optionIcon {
+    fill: #000;
+    margin: 0;
+}

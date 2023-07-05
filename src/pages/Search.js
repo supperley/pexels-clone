@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import PhotoGallery from '../components/layout/PhotoGallery';
 import Navbar from '../components/layout/Navbar';
 import SearchNotFound from './SearchNotFound';
+import Filter from '../components/UI/FilterContainer';
 
 const Search = (props) => {
     const { query } = useParams();
@@ -20,10 +21,11 @@ const Search = (props) => {
                     <h1 className={classNames(styles.searchHeader, 'text')}>
                         {query}
                     </h1>
-                    <PhotoGallery
+                    <Filter />
+                    {/* <PhotoGallery
                         searchQuery={query}
                         handleNoResults={setNoResults}
-                    />
+                    /> */}
                 </main>
             )}
         </>
