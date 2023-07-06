@@ -10,6 +10,9 @@ import Filter from '../components/UI/FilterContainer';
 const Search = (props) => {
     const { query } = useParams();
     const [noResults, setNoResults] = useState(false);
+    // TODO: use Redux
+    const [orientation, setOrientation] = useState('');
+    const [size, setSize] = useState('');
 
     return (
         <>
@@ -22,10 +25,10 @@ const Search = (props) => {
                         {query}
                     </h1>
                     <Filter />
-                    {/* <PhotoGallery
+                    <PhotoGallery
                         searchQuery={query}
                         handleNoResults={setNoResults}
-                    /> */}
+                    />
                 </main>
             )}
         </>

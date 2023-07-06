@@ -63,7 +63,6 @@ const Filter = (props) => {
                     isOpen && styles.dropdownMenuOpen
                 )}
                 dataset-select-dropdown="true"
-                //style={{ minWidth: 0 }}
             >
                 {console.log(options)}
                 {options.map((option, index) => (
@@ -76,6 +75,14 @@ const Filter = (props) => {
                         )}
                         onClick={() => {
                             setCurrentOption(index);
+                            if (index) {
+                                // TODO: use Redux
+                                // Navigate(
+                                //     `/search/${query}/?${props.filterName}=${option.value}`,
+                                //     { replace: true }
+                                // );
+                                // window.location.reload();
+                            }
                         }}
                     >
                         <span className={styles.optionChildren}>

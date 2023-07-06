@@ -67,7 +67,7 @@ const HeroHeader = () => {
 
     useEffect(() => {
         console.log(
-            `setState completed, randomTrendingSearches: ${randomTrendingSearches} `
+            `[useEffect] randomTrendingSearches state: ${randomTrendingSearches} `
         );
         if (randomTrendingSearches.length > 0) {
             fetchPhoto();
@@ -76,7 +76,7 @@ const HeroHeader = () => {
 
     const [fetchPhoto, isLoading, error] = useFetching(async () => {
         console.log(
-            `HeroHeader callback, randomTrendingSearches: ${randomTrendingSearches} `
+            `[useFetching callback] randomTrendingSearches state: ${randomTrendingSearches} `
         );
 
         const loadedPhotos = await PhotoService.search(

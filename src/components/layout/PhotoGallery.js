@@ -76,7 +76,7 @@ const PhotoGallery = (props) => {
             if (
                 !isLoading &&
                 !isEnd &&
-                scrollTop + window.innerHeight >= offsetHeight
+                scrollTop + window.innerHeight >= offsetHeight - 1
             ) {
                 console.log(`[handleScroll] setPageNumber, isEnd: ${isEnd}`);
                 setPageNumber((prevPage) => prevPage + 1);

@@ -10,7 +10,6 @@ function App() {
             <Routes>
                 <Route path="/" element={<Home />} exact />
                 <Route path="/search" element={<Search />} exact />
-                /* TODO Empty search */
                 <Route path="/search/:query" element={<Search />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
