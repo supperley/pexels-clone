@@ -5,7 +5,7 @@ const useFetching = (callback) => {
     const [error, setError] = useState('');
 
     const fetching = async () => {
-        console.log('useFetching fetching');
+        console.log('[useFetching] Fetching...');
         try {
             setIsLoading(true);
             await callback();

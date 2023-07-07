@@ -14,7 +14,12 @@ const PhotoGallery = (props) => {
 
     const [fetchPhotos, isLoading, error] = useFetching(async () => {
         const loadedPhotos = props.searchQuery
-            ? await PhotoService.search(props.searchQuery, pageNumber, 15)
+            ? await PhotoService.search(
+                  props.searchQuery,
+                  props.searchParams,
+                  pageNumber,
+                  15
+              )
             : await PhotoService.getCurated(pageNumber);
 
         if (loadedPhotos.length === 0) {
@@ -25,7 +30,7 @@ const PhotoGallery = (props) => {
         }
 
         console.log(
-            `loadedPhotos.length: ${loadedPhotos.length}, loadedPhotos: ${loadedPhotos}, isEnd: ${isEnd}`
+            `loadedPhotos.length: ${loadedPhotos.length}, isEnd: ${isEnd}`
         );
 
         const loadedPhotosFirst = loadedPhotos.slice(
@@ -47,18 +52,15 @@ const PhotoGallery = (props) => {
         console.log('loadedPhotosSecond', loadedPhotosSecond);
         console.log('loadedPhotosThird', loadedPhotosThird);
 
-        setFirstColumnPhotos((prevPhotos) => [
-            ...prevPhotos,
-            ...loadedPhotosFirst,
-        ]);
-        setSecondColumnPhotos((prevPhotos) => [
-            ...prevPhotos,
-            ...loadedPhotosSecond,
-        ]);
-        setThirdColumnPhotos((prevPhotos) => [
-            ...prevPhotos,
-            ...loadedPhotosThird,
-        ]);
+        setFirstColumnPhotos((prevPhotos) =>
+            prevPhotos.concat(loadedPhotosFirst)
+        );
+        setSecondColumnPhotos((prevPhotos) =>
+            prevPhotos.concat(loadedPhotosSecond)
+        );
+        setThirdColumnPhotos((prevPhotos) =>
+            prevPhotos.concat(loadedPhotosThird)
+        );
     });
 
     useEffect(() => {

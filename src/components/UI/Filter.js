@@ -1,13 +1,37 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import styles from './Filter.module.css';
 import classNames from 'classnames';
+import { useNavigate } from 'react-router-dom';
 
 const Filter = (props) => {
-    const options = useMemo(() => props.filterOptions, [props.filterOptions]);
+    const filterOptions = useMemo(
+        () => props.filterOptions,
+        [props.filterOptions]
+    );
+    const navigate = useNavigate();
 
     const [currentOption, setCurrentOption] = useState(0);
     const [isOpen, setIsOpen] = useState(false);
     const filterRef = useRef();
+
+    const handleOptionClick = (option, index) => {
+        // TODO: Replace currentOption with Redux to exclude a rerender
+        setCurrentOption(index);
+
+        const queryParams = new URLSearchParams(location.search);
+        console.log(`[handleOptionClick] ${queryParams}`);
+
+        if (index) {
+            queryParams.set(props.filterName, option.value);
+        } else {
+            if (queryParams.has(props.filterName)) {
+                queryParams.delete(props.filterName);
+            }
+        }
+
+        const newSearch = `${location.pathname}?${queryParams.toString()}`;
+        navigate(newSearch, { replace: true });
+    };
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -26,6 +50,11 @@ const Filter = (props) => {
 
     return (
         <div className={styles.filterDropdown} ref={filterRef}>
+            {
+                /* // TODO: Delete */ console.log(
+                    `[Filter] ${JSON.stringify(filterOptions)}`
+                )
+            }
             <button
                 className={classNames(
                     styles.filterButton,
@@ -37,7 +66,7 @@ const Filter = (props) => {
             >
                 <span className="">
                     <span className={styles.filterText}>
-                        {options[currentOption]}
+                        {filterOptions[currentOption].name}
                     </span>
                     <svg
                         className={classNames(
@@ -64,8 +93,7 @@ const Filter = (props) => {
                 )}
                 dataset-select-dropdown="true"
             >
-                {console.log(options)}
-                {options.map((option, index) => (
+                {filterOptions.map((option, index) => (
                     <button
                         role="option"
                         key={`${props.filterName}-item-${index}`}
@@ -73,20 +101,12 @@ const Filter = (props) => {
                             styles.option,
                             styles.optionSelected
                         )}
-                        onClick={() => {
-                            setCurrentOption(index);
-                            if (index) {
-                                // TODO: use Redux
-                                // Navigate(
-                                //     `/search/${query}/?${props.filterName}=${option.value}`,
-                                //     { replace: true }
-                                // );
-                                // window.location.reload();
-                            }
-                        }}
+                        onClick={() => handleOptionClick(option, index)}
                     >
                         <span className={styles.optionChildren}>
-                            <span className={styles.optionText}>{option}</span>
+                            <span className={styles.optionText}>
+                                {option?.name}
+                            </span>
                             {index === currentOption && (
                                 <svg
                                     className={styles.optionIcon}

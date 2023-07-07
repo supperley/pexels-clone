@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useLocation, useParams, useSearchParams } from 'react-router-dom';
 import styles from './Search.module.css';
 import classNames from 'classnames';
 import PhotoGallery from '../components/layout/PhotoGallery';
@@ -9,10 +9,19 @@ import Filter from '../components/UI/FilterContainer';
 
 const Search = (props) => {
     const { query } = useParams();
+    let [searchParams] = useSearchParams();
     const [noResults, setNoResults] = useState(false);
-    // TODO: use Redux
-    const [orientation, setOrientation] = useState('');
-    const [size, setSize] = useState('');
+    const [galleryKey, setGalleryKey] = useState(0);
+
+    useEffect(() => {
+        console.log(
+            '[Search] useEffect() params changed, reload PhotoGallery...',
+            query,
+            searchParams
+        );
+        // TODO: Fix rerender (searchParams)
+        //setGalleryKey((prevKey) => prevKey + 1); // Gallery force update
+    }, [query, searchParams]);
 
     return (
         <>
@@ -25,10 +34,12 @@ const Search = (props) => {
                         {query}
                     </h1>
                     <Filter />
-                    <PhotoGallery
+                    {/* <PhotoGallery
+                        key={galleryKey}
                         searchQuery={query}
+                        searchParams={searchParams}
                         handleNoResults={setNoResults}
-                    />
+                    /> */}
                 </main>
             )}
         </>

@@ -4,16 +4,22 @@ import classNames from 'classnames';
 import Filter from './Filter';
 
 const orientationOptions = [
-    'Все варианты ориентации',
-    'Горизонтальная',
-    'Вертикальная',
-    'Квадратное изображение',
+    { value: 'all', name: 'Все варианты ориентации' },
+    { value: 'horizontal', name: 'Горизонтальная' },
+    { value: 'portrait', name: 'Вертикальная' },
+    { value: 'square', name: 'Квадрат' },
 ];
 
-const sizeOptions = ['Все размеры', 'Большой', 'Средний', 'Маленький'];
+const sizeOptions = [
+    { value: 'all', name: 'Все размеры' },
+    { value: 'large', name: 'Большой' },
+    { value: 'medium', name: 'Средний' },
+    { value: 'small', name: 'Маленький' },
+];
 
 const FilterContainer = () => {
     const [filterContainerOpen, setFilterContainerOpen] = useState(false);
+    const [orientationIndex, setOrientationIndex] = useState(0);
 
     return (
         <>
@@ -54,6 +60,8 @@ const FilterContainer = () => {
                 <Filter
                     filterOptions={orientationOptions}
                     filterName="orientation"
+                    currentOption={orientationIndex}
+                    setCurrentOption={setOrientationIndex}
                 ></Filter>
                 <Filter filterOptions={sizeOptions} filterName="size"></Filter>
             </div>
