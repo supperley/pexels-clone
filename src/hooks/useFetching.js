@@ -1,19 +1,19 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 const useFetching = (callback) => {
-    const [isLoading, setIsLoading] = useState(false);
+    const isLoading = useRef(false);
     const [error, setError] = useState('');
 
     const fetching = async () => {
         console.log('[useFetching] Fetching...');
         try {
-            setIsLoading(true);
+            isLoading.current = true;
             await callback();
         } catch (error) {
             setError('Error while fetching: ', error);
         }
 
-        setIsLoading(false);
+        isLoading.current = false;
     };
 
     return [fetching, isLoading, error];

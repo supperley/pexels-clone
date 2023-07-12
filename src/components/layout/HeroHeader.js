@@ -49,7 +49,14 @@ const categories = [
 ];
 
 const HeroHeader = () => {
-    const [randomTrendingSearches, setRandomTrendingSearches] = useState([]);
+    const randomTrendingSearches = categories
+        .sort(() => Math.random() - 0.5)
+        .slice(0, 7);
+
+    const [currentTrendingSearches, setCurrentTrendingSearches] = useState(
+        randomTrendingSearches
+    );
+
     const [headerPhoto, setHeaderPhoto] = useState({
         photographer: '',
         src: '',
@@ -57,37 +64,32 @@ const HeroHeader = () => {
     });
 
     useEffect(() => {
-        const sortedCategories = categories
-            .sort(() => Math.random() - 0.5)
-            .slice(0, 7);
-        console.log(`sortedCategories ${sortedCategories}`);
-
-        setRandomTrendingSearches(sortedCategories);
+        fetchPhoto();
     }, []);
-
-    useEffect(() => {
-        console.log(
-            `[useEffect] randomTrendingSearches state: ${randomTrendingSearches} `
-        );
-        if (randomTrendingSearches.length > 0) {
-            fetchPhoto();
-        }
-    }, [randomTrendingSearches]);
 
     const [fetchPhoto, isLoading, error] = useFetching(async () => {
         console.log(
-            `[useFetching callback] randomTrendingSearches state: ${randomTrendingSearches} `
+            `[useFetching callback] currentTrendingSearches state: ${currentTrendingSearches} `
         );
 
         const loadedPhotos = await PhotoService.search(
-            randomTrendingSearches[0],
-            1,
+            currentTrendingSearches[0],
+            {},
             1
         );
 
-        console.log(loadedPhotos);
-
-        setHeaderPhoto(loadedPhotos[0]);
+        if (loadedPhotos.length === 0) {
+            setHeaderPhoto({
+                id: 9427143,
+                url: 'https://www.pexels.com/photo/classic-car-on-dirt-road-near-tree-9427143/',
+                src: 'https://images.pexels.com/photos/9427143/pexels-photo-9427143.jpeg',
+                photographer: 'Mr Dark_space',
+                photographerURL:
+                    'https://www.pexels.com/@mr-dark_space-84743911',
+            });
+        } else {
+            setHeaderPhoto(loadedPhotos[0]);
+        }
     });
 
     return (
@@ -110,7 +112,7 @@ const HeroHeader = () => {
                         Тенденции:
                     </span>
                     <ul className={styles.trendingSearchesList}>
-                        {randomTrendingSearches.map((item, index) => (
+                        {currentTrendingSearches.map((item, index) => (
                             <li
                                 className={classNames(
                                     styles.trendingSearchesItem,
@@ -129,7 +131,7 @@ const HeroHeader = () => {
                                     {item}
                                 </a>
                                 {index !==
-                                    randomTrendingSearches.length - 1 && (
+                                    currentTrendingSearches.length - 1 && (
                                     <>,&nbsp;</>
                                 )}
                             </li>

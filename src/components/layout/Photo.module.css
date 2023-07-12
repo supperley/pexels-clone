@@ -90,6 +90,11 @@
     color: #000;
 }
 
+.buttonLike_liked svg {
+    animation-duration: 0.5s;
+    animation-name: like;
+}
+
 .buttonBookmark {
     display: flex;
     justify-content: center;
@@ -129,4 +134,14 @@
     line-height: 26px;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+
+@keyframes like {
+    0% {
+        transform: scale(1.35);
+    }
+
+    100% {
+        transform: none;
+    }
 }

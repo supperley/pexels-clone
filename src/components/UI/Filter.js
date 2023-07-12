@@ -8,18 +8,22 @@ const Filter = (props) => {
         () => props.filterOptions,
         [props.filterOptions]
     );
+
+    const getValueName = (value) => {
+        const option = filterOptions.find((option) => option.value === value);
+        return option ? option.name : '';
+    };
+
     const navigate = useNavigate();
 
-    const [currentOption, setCurrentOption] = useState(0);
     const [isOpen, setIsOpen] = useState(false);
     const filterRef = useRef();
 
     const handleOptionClick = (option, index) => {
-        // TODO: Replace currentOption with Redux to exclude a rerender
-        setCurrentOption(index);
+        props.onOptionChange(option.value);
 
         const queryParams = new URLSearchParams(location.search);
-        console.log(`[handleOptionClick] ${queryParams}`);
+        console.log(`[Filter] (handleOptionClick) ${queryParams}`);
 
         if (index) {
             queryParams.set(props.filterName, option.value);
@@ -50,15 +54,13 @@ const Filter = (props) => {
 
     return (
         <div className={styles.filterDropdown} ref={filterRef}>
-            {
-                /* // TODO: Delete */ console.log(
-                    `[Filter] ${JSON.stringify(filterOptions)}`
-                )
-            }
+            {console.log(
+                `[Filter] filterName = ${props.filterName}, currentOption = ${props.currentOption}`
+            )}
             <button
                 className={classNames(
                     styles.filterButton,
-                    currentOption && styles.filterButton_active
+                    props.currentOption != 'all' && styles.filterButton_active
                 )}
                 onClick={() => {
                     setIsOpen((prev) => !prev);
@@ -66,7 +68,7 @@ const Filter = (props) => {
             >
                 <span className="">
                     <span className={styles.filterText}>
-                        {filterOptions[currentOption].name}
+                        {getValueName(props.currentOption)}
                     </span>
                     <svg
                         className={classNames(
@@ -107,7 +109,7 @@ const Filter = (props) => {
                             <span className={styles.optionText}>
                                 {option?.name}
                             </span>
-                            {index === currentOption && (
+                            {option?.value === props.currentOption && (
                                 <svg
                                     className={styles.optionIcon}
                                     viewBox="0 0 24 24"

@@ -16,9 +16,9 @@ const PhotoGallery = (props) => {
         const loadedPhotos = props.searchQuery
             ? await PhotoService.search(
                   props.searchQuery,
-                  props.searchParams,
                   pageNumber,
-                  15
+                  15,
+                  props.searchParams
               )
             : await PhotoService.getCurated(pageNumber);
 
@@ -30,7 +30,7 @@ const PhotoGallery = (props) => {
         }
 
         console.log(
-            `loadedPhotos.length: ${loadedPhotos.length}, isEnd: ${isEnd}`
+            `[PhotoGallery] loadedPhotos.length: ${loadedPhotos.length}, isEnd: ${isEnd}`
         );
 
         const loadedPhotosFirst = loadedPhotos.slice(
@@ -48,9 +48,9 @@ const PhotoGallery = (props) => {
             loadedPhotos.length
         );
 
-        console.log('loadedPhotosFirst', loadedPhotosFirst);
-        console.log('loadedPhotosSecond', loadedPhotosSecond);
-        console.log('loadedPhotosThird', loadedPhotosThird);
+        console.log('[PhotoGallery] loadedPhotosFirst', loadedPhotosFirst);
+        console.log('[PhotoGallery] loadedPhotosSecond', loadedPhotosSecond);
+        console.log('[PhotoGallery] loadedPhotosThird', loadedPhotosThird);
 
         setFirstColumnPhotos((prevPhotos) =>
             prevPhotos.concat(loadedPhotosFirst)
@@ -68,7 +68,7 @@ const PhotoGallery = (props) => {
             const { scrollTop, offsetHeight } = document.documentElement;
 
             console.log(
-                `[handleScroll] scrollTop: ${scrollTop}, innerHeight: ${
+                `[PhotoGallery] (handleScroll) scrollTop: ${scrollTop}, innerHeight: ${
                     window.innerHeight
                 }, offsetHeight: ${offsetHeight} (${
                     scrollTop + window.innerHeight
@@ -76,11 +76,22 @@ const PhotoGallery = (props) => {
             );
 
             if (
-                !isLoading &&
+                scrollTop + window.innerHeight >= offsetHeight - 1 &&
+                isLoading.current
+            ) {
+                console.log(
+                    `[PhotoGallery] (handleScroll) isLoading BLOCKED, isEnd ${isEnd}`
+                );
+            }
+
+            if (
+                !isLoading.current &&
                 !isEnd &&
                 scrollTop + window.innerHeight >= offsetHeight - 1
             ) {
-                console.log(`[handleScroll] setPageNumber, isEnd: ${isEnd}`);
+                console.log(
+                    `[PhotoGallery] (handleScroll) setPageNumber, isLoading: ${isLoading.current}, isEnd: ${isEnd}`
+                );
                 setPageNumber((prevPage) => prevPage + 1);
             }
         };
@@ -115,7 +126,7 @@ const PhotoGallery = (props) => {
                     ))}
                 </div>
             </div>
-            {isLoading && (
+            {isLoading.current && (
                 <div className={styles.loadingContainer}>
                     <Spinner animation="border" role="status" />
                 </div>

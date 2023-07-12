@@ -1,10 +1,19 @@
+import { useDispatch } from 'react-redux';
 import './App.css';
 import Home from './pages/Home';
 import NotFound from './pages/NotFound';
 import Search from './pages/Search';
 import { Route, Routes } from 'react-router-dom';
+import { useEffect } from 'react';
+import { initLikes } from './store/photosSlice';
 
 function App() {
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(initLikes());
+    }, [dispatch]);
+
     return (
         <>
             <Routes>

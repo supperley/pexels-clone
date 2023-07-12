@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import styles from './FilterContainer.module.css';
 import classNames from 'classnames';
 import Filter from './Filter';
+import { useDispatch, useSelector } from 'react-redux';
+import { setOrientationFilter, setSizeFilter } from '../../store/filterSlice';
 
 const orientationOptions = [
     { value: 'all', name: 'Все варианты ориентации' },
-    { value: 'horizontal', name: 'Горизонтальная' },
+    { value: 'landscape', name: 'Горизонтальная' },
     { value: 'portrait', name: 'Вертикальная' },
     { value: 'square', name: 'Квадрат' },
 ];
@@ -19,7 +21,23 @@ const sizeOptions = [
 
 const FilterContainer = () => {
     const [filterContainerOpen, setFilterContainerOpen] = useState(false);
-    const [orientationIndex, setOrientationIndex] = useState(0);
+
+    const dispatch = useDispatch();
+
+    const sizeFilter = useSelector((state) => state.filter.size);
+    const orientationFilter = useSelector((state) => state.filter.orientation);
+
+    const handleSizeChange = (size) => {
+        dispatch(setSizeFilter(size)); // Обновление фильтра размера
+    };
+
+    const handleOrientationChange = (orientation) => {
+        dispatch(setOrientationFilter(orientation)); // Обновление фильтра ориентации
+    };
+
+    const handleClearFilters = () => {
+        dispatch(clearFilters()); // Очистка фильтров
+    };
 
     return (
         <>
@@ -60,10 +78,15 @@ const FilterContainer = () => {
                 <Filter
                     filterOptions={orientationOptions}
                     filterName="orientation"
-                    currentOption={orientationIndex}
-                    setCurrentOption={setOrientationIndex}
+                    currentOption={orientationFilter}
+                    onOptionChange={handleOrientationChange}
                 ></Filter>
-                <Filter filterOptions={sizeOptions} filterName="size"></Filter>
+                <Filter
+                    filterOptions={sizeOptions}
+                    filterName="size"
+                    currentOption={sizeFilter}
+                    onOptionChange={handleSizeChange}
+                ></Filter>
             </div>
         </>
     );
