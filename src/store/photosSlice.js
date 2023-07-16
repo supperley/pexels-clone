@@ -4,7 +4,7 @@ const initialState = {
     liked: [],
 };
 
-export const counterSlice = createSlice({
+export const photosSlice = createSlice({
     name: 'counter',
     initialState,
     reducers: {
@@ -26,6 +26,6 @@ export const counterSlice = createSlice({
     },
 });
 
-export const { addLike, removeLike, initLikes } = counterSlice.actions;
+export const { addLike, removeLike, initLikes } = photosSlice.actions;
 
-export default counterSlice.reducer;
+export default photosSlice.reducer;

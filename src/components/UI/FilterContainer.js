@@ -9,7 +9,7 @@ const orientationOptions = [
     { value: 'all', name: 'Все варианты ориентации' },
     { value: 'landscape', name: 'Горизонтальная' },
     { value: 'portrait', name: 'Вертикальная' },
-    { value: 'square', name: 'Квадрат' },
+    { value: 'square', name: 'Квадратное изображение' },
 ];
 
 const sizeOptions = [
