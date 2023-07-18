@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import styles from './PhotoGallery.module.css';
-import Spinner from '../UI/Spinner';
-import useFetching from '../../hooks/useFetching';
-import PhotoService from '../../api/PhotoService';
-import Photo from './Photo';
+import Spinner from '../../UI/Spinner/Spinner';
+import useFetching from '../../../hooks/useFetching';
+import PhotoService from '../../../api/PhotoService';
+import Photo from '../Photo/Photo';
 
 const PhotoGallery = (props) => {
     const [pageNumber, setPageNumber] = useState(1);

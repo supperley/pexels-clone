@@ -1,57 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import styles from './HeroHeader.module.css';
 import classNames from 'classnames';
-import SearchBar from '../UI/SearchBar';
-import useFetching from '../../hooks/useFetching';
-import PhotoService from '../../api/PhotoService';
-
-const categories = [
-    '35 мм',
-    '4 июля',
-    'абстрактный',
-    'автомобиль',
-    'аналоговая',
-    'архитектура',
-    'баланс',
-    'бездорожье',
-    'бизнес',
-    'веселье',
-    'вода',
-    'гора',
-    'город',
-    'досуг',
-    'еда',
-    'живописный',
-    'здание',
-    'комната',
-    'космос',
-    'костюмы',
-    'красивый',
-    'лес',
-    'лето',
-    'мебель',
-    'музей',
-    'небо',
-    'облака',
-    'отражение',
-    'офис',
-    'пейзаж',
-    'пляж',
-    'природа',
-    'путешествовать',
-    'современный',
-    'темный',
-    'технология',
-    'фотосессия',
-    'футуристический',
-    'цветы',
-    'шаг',
-];
+import SearchBar from '../../UI/SearchBar/SearchBar';
+import useFetching from '../../../hooks/useFetching';
+import PhotoService from '../../../api/PhotoService';
+import { defaultPhoto } from '../../../helpers/constants';
+import { getRandomCategories } from '../../../helpers/utils';
 
 const HeroHeader = () => {
-    const randomTrendingSearches = categories
-        .sort(() => Math.random() - 0.5)
-        .slice(0, 7);
+    const randomTrendingSearches = getRandomCategories();
+
+    console.log(randomTrendingSearches);
 
     const [currentTrendingSearches, setCurrentTrendingSearches] = useState(
         randomTrendingSearches
@@ -79,14 +38,7 @@ const HeroHeader = () => {
         );
 
         if (loadedPhotos.length === 0) {
-            setHeaderPhoto({
-                id: 9427143,
-                url: 'https://www.pexels.com/photo/classic-car-on-dirt-road-near-tree-9427143/',
-                src: 'https://images.pexels.com/photos/9427143/pexels-photo-9427143.jpeg',
-                photographer: 'Mr Dark_space',
-                photographerURL:
-                    'https://www.pexels.com/@mr-dark_space-84743911',
-            });
+            setHeaderPhoto(defaultPhoto);
         } else {
             setHeaderPhoto(loadedPhotos[0]);
         }

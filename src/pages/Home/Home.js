@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import HeroHeader from '../components/layout/HeroHeader';
+import HeroHeader from '../../components/layout/HeroHeader/HeroHeader';
 import classNames from 'classnames';
-import PhotoGallery from '../components/layout/PhotoGallery';
+import PhotoGallery from '../../components/layout/PhotoGallery/PhotoGallery';
 import styles from './Home.module.css';
-import Navbar from '../components/layout/Navbar';
+import Navbar from '../../components/layout/Navbar/Navbar';
 
 const Home = () => {
     const [isScrolled, setIsScrolled] = useState(false);
@@ -26,7 +26,7 @@ const Home = () => {
 
     return (
         <>
-            <Navbar isScrolled={isScrolled} isHome={true} />
+            <Navbar isScrolled={isScrolled} isHome />
             <HeroHeader />
             <main className={styles.photoGalleryWrapper}>
                 <h4 className={classNames(styles.photoGalleryHeader, 'text')}>

@@ -2,12 +2,12 @@ import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
 import styles from './Search.module.css';
 import classNames from 'classnames';
-import PhotoGallery from '../components/layout/PhotoGallery';
-import Navbar from '../components/layout/Navbar';
-import SearchNotFound from './SearchNotFound';
-import Filter from '../components/UI/FilterContainer';
+import PhotoGallery from '../../components/layout/PhotoGallery/PhotoGallery';
+import Navbar from '../../components/layout/Navbar/Navbar';
+import SearchNotFound from '../SearchNotFound/SearchNotFound';
+import Filter from '../../components/UI/FilterContainer/FilterContainer';
 import { useDispatch } from 'react-redux';
-import { setOrientationFilter, setSizeFilter } from '../store/filterSlice';
+import { setOrientationFilter, setSizeFilter } from '../../store/filterSlice';
 
 const Search = (props) => {
     const { query } = useParams();
@@ -51,7 +51,7 @@ const Search = (props) => {
 
     return (
         <>
-            <Navbar isScrolled={true} query={query} />
+            <Navbar isScrolled query={query} />
             {noResults ? (
                 <SearchNotFound query={query} />
             ) : (
